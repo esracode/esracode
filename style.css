@@ -334,38 +334,37 @@ body {
 
 @media (max-width: 480px) {
     .container {
-        padding: 30px 20px;
+        padding: 30px 15px;
     }
     
     .profile-images {
         flex-direction: row;
         flex-wrap: nowrap;
-        gap: 10px;
+        gap: 8px;
         justify-content: center;
+        width: 100%;
     }
     
     .avatar {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .qrcode-image {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
+        flex-shrink: 0;
     }
     
     .qrcode-container {
-        padding: 3px;
-        width: 80px;
-        height: 80px;
+        padding: 2px;
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+        flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
     }
     
     .qrcode-image {
-        width: 74px;
-        height: 74px;
+        width: 66px;
+        height: 66px;
     }
     
     .name {
