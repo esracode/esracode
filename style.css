@@ -218,6 +218,9 @@ body {
     border-radius: 12px;
     border: 2px solid #e0e0e0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 120px;
+    height: 120px;
+    box-sizing: border-box;
 }
 
 .qrcode-image {
@@ -346,7 +349,7 @@ body {
     }
     
     .qrcode-container {
-        padding: 1px;
+        padding: 2px;
         width: 70px;
         height: 70px;
         min-width: 70px;
@@ -359,8 +362,8 @@ body {
     }
     
     .qrcode-image {
-        width: 68px;
-        height: 68px;
+        width: 66px;
+        height: 66px;
     }
     
     .name {
