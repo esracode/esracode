@@ -42,7 +42,7 @@
             
             <div class="creations-section collapsed">
                 <button class="link-button creations-toggle" type="button">
-                    <span class="link-text"><span class="lock-icon">🔒</span> <span data-i18n="creations-title">My Creations</span></span>
+                    <span class="link-text" data-i18n="creations-title">My Creations</span>
                 </button>
                 <div class="creations-links" id="creations-links">
                 <div class="video-link-item">
@@ -72,19 +72,6 @@
         </footer>
     </div>
 
-    <!-- Password Modal -->
-    <div id="password-modal" class="password-modal">
-        <div class="password-modal-content">
-            <h3 data-i18n="password-title">Enter Password</h3>
-            <input type="password" id="password-input" placeholder="" data-i18n-placeholder="password-placeholder">
-            <div class="password-modal-buttons">
-                <button id="password-submit" data-i18n="password-submit">Submit</button>
-                <button id="password-cancel" data-i18n="password-cancel">Cancel</button>
-            </div>
-            <p id="password-error" class="password-error" data-i18n="password-error" style="display: none;"></p>
-        </div>
-    </div>
-
     <script>
         // Translation data
         const translations = {
@@ -98,11 +85,6 @@
                 "video1": "🎬 Winning video of the \"Féminisons l'Aéronautique\" contest",
                 "video2": "🎬 Winning video of the contest: My first contest",
                 "video3": "🎬 Video of my discovery internship",
-                "password-title": "Enter Password",
-                "password-placeholder": "Password",
-                "password-submit": "Submit",
-                "password-cancel": "Cancel",
-                "password-error": "Incorrect password. Please try again.",
                 footer: "Made with ❤️ for GitHub Pages"
             },
             fr: {
@@ -115,11 +97,6 @@
                 "video1": "🎬 Vidéo gagnante du concours \"Féminisons l'Aéronautique\"",
                 "video2": "🎬 Vidéo gagnante du concours: Mon premier concours",
                 "video3": "🎬 Vidéo de mon stage de découverte",
-                "password-title": "Entrez le mot de passe",
-                "password-placeholder": "Mot de passe",
-                "password-submit": "Valider",
-                "password-cancel": "Annuler",
-                "password-error": "Mot de passe incorrect. Veuillez réessayer.",
                 footer: "Fait avec ❤️ pour GitHub Pages"
             }
         };
@@ -174,102 +151,18 @@
             });
         });
 
-        // Password protection
-        const PASSWORD = 'esracode2024'; // Change this to your desired password
-        
-        function isAuthenticated() {
-            return sessionStorage.getItem('creations-authenticated') === 'true';
-        }
-        
-        function setAuthenticated(value) {
-            sessionStorage.setItem('creations-authenticated', value ? 'true' : 'false');
-        }
-        
-        function showPasswordModal() {
-            const modal = document.getElementById('password-modal');
-            const input = document.getElementById('password-input');
-            const error = document.getElementById('password-error');
-            
-            modal.style.display = 'flex';
-            input.value = '';
-            error.style.display = 'none';
-            input.focus();
-            
-            // Update placeholder with translation
-            const lang = getLanguage();
-            input.placeholder = translations[lang]['password-placeholder'];
-        }
-        
-        function hidePasswordModal() {
-            const modal = document.getElementById('password-modal');
-            modal.style.display = 'none';
-        }
-        
-        function checkPassword() {
-            const input = document.getElementById('password-input');
-            const error = document.getElementById('password-error');
-            
-            if (input.value === PASSWORD) {
-                setAuthenticated(true);
-                hidePasswordModal();
-                showCreations();
-            } else {
-                error.style.display = 'block';
-                input.value = '';
-                input.focus();
-            }
-        }
-        
-        function showCreations() {
-            const creationsSection = document.querySelector('.creations-section');
-            const creationsLinks = document.getElementById('creations-links');
-            
-            if (creationsSection && creationsLinks) {
-                creationsSection.classList.remove('collapsed');
-            }
-        }
-        
-        function hideCreations() {
-            const creationsSection = document.querySelector('.creations-section');
-            if (creationsSection) {
-                creationsSection.classList.add('collapsed');
-            }
-        }
-        
-        // Password modal event listeners
-        document.getElementById('password-submit').addEventListener('click', checkPassword);
-        document.getElementById('password-cancel').addEventListener('click', hidePasswordModal);
-        document.getElementById('password-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-        
-        // Close modal when clicking outside
-        document.getElementById('password-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hidePasswordModal();
-            }
-        });
-        
-        // Collapsible creations section with password protection
+        // Collapsible creations section
         const creationsSection = document.querySelector('.creations-section');
         const creationsToggle = document.querySelector('.creations-toggle');
         
         if (creationsToggle && creationsSection) {
             creationsToggle.addEventListener('click', (e) => {
                 e.preventDefault();
+                creationsSection.classList.toggle('collapsed');
                 
-                if (isAuthenticated()) {
-                    // If authenticated, toggle normally
-                    creationsSection.classList.toggle('collapsed');
-                } else {
-                    // If not authenticated, show password modal
-                    if (creationsSection.classList.contains('collapsed')) {
-                        showPasswordModal();
-                    } else {
-                        creationsSection.classList.add('collapsed');
-                    }
+                // Generate QR codes when section is expanded
+                if (!creationsSection.classList.contains('collapsed')) {
+                    setTimeout(generateVideoQRCodes, 100);
                 }
             });
         }
@@ -305,21 +198,6 @@
             
             setTimeout(tryGenerate, 50);
         }
-
-        // Check authentication on page load
-        if (!isAuthenticated()) {
-            hideCreations();
-        } else {
-            showCreations();
-            setTimeout(generateVideoQRCodes, 200);
-        }
-        
-        // Generate video QR codes when section is unlocked
-        const originalShowCreations = showCreations;
-        showCreations = function() {
-            originalShowCreations();
-            setTimeout(generateVideoQRCodes, 200);
-        };
 
         // Generate QR code
         function generateQRCode() {

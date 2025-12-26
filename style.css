@@ -176,10 +176,6 @@ body {
     font-family: inherit;
 }
 
-.lock-icon {
-    margin-right: 8px;
-}
-
 .creations-toggle::before {
     content: '▶';
     position: absolute;
