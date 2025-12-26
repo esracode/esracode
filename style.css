@@ -186,6 +186,27 @@ body {
     overflow: hidden;
 }
 
+.video-link-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.video-qrcode {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 5px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-link-item .link-button {
+    flex: 1;
+}
+
 .qrcode-container {
     display: flex;
     justify-content: center;

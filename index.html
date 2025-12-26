@@ -43,15 +43,24 @@
                     <span class="link-text"><span class="lock-icon">🔒</span> <span data-i18n="creations-title">My Creations</span></span>
                 </button>
                 <div class="creations-links" id="creations-links">
-                <a href="https://youtu.be/xa1O6sWsie0" class="link-button" target="_blank" rel="noopener noreferrer">
-                    <span class="link-text" data-i18n="video1">🎬 Video gagnante du concours "Féminisons l'Aéronautique"</span>
-                </a>
-                <a href="https://youtu.be/ZO747r5QFXY" class="link-button" target="_blank" rel="noopener noreferrer">
-                    <span class="link-text" data-i18n="video2">🎬 Vidéo gagnante du concours: Mon premier concours</span>
-                </a>
-                <a href="https://youtu.be/t--mB2_Jl0s" class="link-button" target="_blank" rel="noopener noreferrer">
-                    <span class="link-text" data-i18n="video3">🎬 Vidéo de mon stage de découverte</span>
-                </a>
+                <div class="video-link-item">
+                    <canvas class="video-qrcode" data-url="https://youtu.be/xa1O6sWsie0"></canvas>
+                    <a href="https://youtu.be/xa1O6sWsie0" class="link-button" target="_blank" rel="noopener noreferrer">
+                        <span class="link-text" data-i18n="video1">🎬 Video gagnante du concours "Féminisons l'Aéronautique"</span>
+                    </a>
+                </div>
+                <div class="video-link-item">
+                    <canvas class="video-qrcode" data-url="https://youtu.be/ZO747r5QFXY"></canvas>
+                    <a href="https://youtu.be/ZO747r5QFXY" class="link-button" target="_blank" rel="noopener noreferrer">
+                        <span class="link-text" data-i18n="video2">🎬 Vidéo gagnante du concours: Mon premier concours</span>
+                    </a>
+                </div>
+                <div class="video-link-item">
+                    <canvas class="video-qrcode" data-url="https://youtu.be/t--mB2_Jl0s"></canvas>
+                    <a href="https://youtu.be/t--mB2_Jl0s" class="link-button" target="_blank" rel="noopener noreferrer">
+                        <span class="link-text" data-i18n="video3">🎬 Vidéo de mon stage de découverte</span>
+                    </a>
+                </div>
                 </div>
             </div>
         </div>
@@ -263,12 +272,52 @@
             });
         }
         
+        // Generate QR codes for video links
+        function generateVideoQRCodes() {
+            const videoQRCodes = document.querySelectorAll('.video-qrcode');
+            
+            function tryGenerate() {
+                if (typeof QRious !== 'undefined') {
+                    videoQRCodes.forEach(canvas => {
+                        const url = canvas.getAttribute('data-url');
+                        if (url) {
+                            try {
+                                new QRious({
+                                    element: canvas,
+                                    value: url,
+                                    size: 50,
+                                    background: 'white',
+                                    foreground: 'black',
+                                    backgroundAlpha: 1,
+                                    foregroundAlpha: 1
+                                });
+                            } catch (e) {
+                                console.error('Error generating video QR code:', e);
+                            }
+                        }
+                    });
+                } else {
+                    setTimeout(tryGenerate, 100);
+                }
+            }
+            
+            setTimeout(tryGenerate, 50);
+        }
+
         // Check authentication on page load
         if (!isAuthenticated()) {
             hideCreations();
         } else {
             showCreations();
+            setTimeout(generateVideoQRCodes, 200);
         }
+        
+        // Generate video QR codes when section is unlocked
+        const originalShowCreations = showCreations;
+        showCreations = function() {
+            originalShowCreations();
+            setTimeout(generateVideoQRCodes, 200);
+        };
 
         // Generate QR code
         function generateQRCode() {
