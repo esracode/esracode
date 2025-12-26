@@ -35,10 +35,6 @@ body {
     z-index: 10;
 }
 
-.profile-images-wrapper {
-    margin-top: 50px;
-}
-
 .lang-btn {
     background: rgba(255, 255, 255, 0.8);
     border: 2px solid #e0e0e0;
@@ -70,21 +66,26 @@ body {
 
 .profile-images-wrapper {
     background: #fff;
+    -webkit-border-radius: 20px;
     border-radius: 20px;
     border: 2px solid #e0e0e0;
     padding: 20px;
     margin-top: 25px;
     margin-bottom: 25px;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: block;
     width: 100%;
     max-width: 100%;
+    min-height: 1px;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
     overflow: visible;
     visibility: visible;
     opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .profile-images {
@@ -364,6 +365,10 @@ body {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        min-height: 90px !important;
+        height: auto !important;
+        -webkit-transform: translateZ(0) !important;
+        transform: translateZ(0) !important;
     }
     
     .profile-images {
