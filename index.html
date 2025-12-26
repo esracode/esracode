@@ -18,9 +18,11 @@
             <div class="profile-images-wrapper">
                 <div class="profile-images">
                     <img src="me.jpg" alt="Esra Code" class="avatar">
-                    <div class="qrcode-container">
-                        <canvas id="qrcode-canvas" class="qrcode-image"></canvas>
-                    </div>
+                    <a href="#" id="main-qrcode-link" class="qrcode-link" target="_blank" rel="noopener noreferrer">
+                        <div class="qrcode-container">
+                            <canvas id="qrcode-canvas" class="qrcode-image"></canvas>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="profile-info">
@@ -46,19 +48,25 @@
                 </button>
                 <div class="creations-links" id="creations-links">
                 <div class="video-link-item">
-                    <canvas class="video-qrcode" data-url="https://youtu.be/xa1O6sWsie0"></canvas>
+                    <a href="https://youtu.be/xa1O6sWsie0" class="video-qrcode-link" target="_blank" rel="noopener noreferrer">
+                        <canvas class="video-qrcode" data-url="https://youtu.be/xa1O6sWsie0"></canvas>
+                    </a>
                     <a href="https://youtu.be/xa1O6sWsie0" class="link-button" target="_blank" rel="noopener noreferrer">
                         <span class="link-text" data-i18n="video1">🎬 Video gagnante du concours "Féminisons l'Aéronautique"</span>
                     </a>
                 </div>
                 <div class="video-link-item">
-                    <canvas class="video-qrcode" data-url="https://youtu.be/ZO747r5QFXY"></canvas>
+                    <a href="https://youtu.be/ZO747r5QFXY" class="video-qrcode-link" target="_blank" rel="noopener noreferrer">
+                        <canvas class="video-qrcode" data-url="https://youtu.be/ZO747r5QFXY"></canvas>
+                    </a>
                     <a href="https://youtu.be/ZO747r5QFXY" class="link-button" target="_blank" rel="noopener noreferrer">
                         <span class="link-text" data-i18n="video2">🎬 Vidéo gagnante du concours: Mon premier concours</span>
                     </a>
                 </div>
                 <div class="video-link-item">
-                    <canvas class="video-qrcode" data-url="https://youtu.be/t--mB2_Jl0s"></canvas>
+                    <a href="https://youtu.be/t--mB2_Jl0s" class="video-qrcode-link" target="_blank" rel="noopener noreferrer">
+                        <canvas class="video-qrcode" data-url="https://youtu.be/t--mB2_Jl0s"></canvas>
+                    </a>
                     <a href="https://youtu.be/t--mB2_Jl0s" class="link-button" target="_blank" rel="noopener noreferrer">
                         <span class="link-text" data-i18n="video3">🎬 Vidéo de mon stage de découverte</span>
                     </a>
@@ -202,6 +210,7 @@
         // Generate QR code
         function generateQRCode() {
             const canvas = document.getElementById('qrcode-canvas');
+            const qrcodeLink = document.getElementById('main-qrcode-link');
             if (!canvas) {
                 console.error('QR code canvas not found');
                 return;
@@ -212,6 +221,11 @@
                 if (typeof QRious !== 'undefined') {
                     // Get current page URL
                     const currentUrl = window.location.href;
+                    
+                    // Set the link href
+                    if (qrcodeLink) {
+                        qrcodeLink.href = currentUrl;
+                    }
                     
                     try {
                         const qr = new QRious({

@@ -215,6 +215,12 @@ body {
     gap: 15px;
 }
 
+.video-qrcode-link {
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
 .video-qrcode {
     width: 60px;
     height: 60px;
@@ -224,10 +230,24 @@ body {
     padding: 5px;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.video-qrcode-link:hover .video-qrcode {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    border-color: #667eea;
 }
 
 .video-link-item .link-button {
     flex: 1;
+}
+
+.qrcode-link {
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
 }
 
 .qrcode-container {
@@ -242,6 +262,13 @@ body {
     width: 120px;
     height: 120px;
     box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.qrcode-link:hover .qrcode-container {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    border-color: #667eea;
 }
 
 .qrcode-image {
