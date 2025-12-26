@@ -64,6 +64,8 @@ body {
 
 .profile-images {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     gap: 30px;
@@ -330,21 +332,29 @@ body {
     }
     
     .profile-images {
-        gap: 15px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 10px;
+        justify-content: center;
     }
     
     .avatar {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
     }
     
     .qrcode-image {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
     }
     
     .qrcode-container {
-        padding: 10px;
+        padding: 8px;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .name {
