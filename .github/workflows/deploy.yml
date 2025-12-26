@@ -16,6 +16,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Install QR code dependencies
+        run: |
+          pip install qrcode[pil]
+      
+      - name: Generate QR code
+        run: |
+          python generate_qrcode.py
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
