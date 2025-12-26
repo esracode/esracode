@@ -28,7 +28,8 @@ body {
 .language-switcher {
     position: absolute;
     top: 20px;
-    left: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     gap: 8px;
     z-index: 10;
@@ -71,6 +72,7 @@ body {
     border-radius: 20px;
     border: 2px solid #e0e0e0;
     padding: 20px;
+    margin-top: 60px;
     margin-bottom: 25px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: inline-block;
@@ -351,7 +353,7 @@ body {
     
     .profile-images-wrapper {
         padding: 10px;
-        margin-top: 50px;
+        margin-top: 60px;
     }
     
     .profile-images {
