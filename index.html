@@ -136,7 +136,8 @@
         const creationsToggle = document.querySelector('.creations-toggle');
         
         if (creationsToggle && creationsSection) {
-            creationsToggle.addEventListener('click', () => {
+            creationsToggle.addEventListener('click', (e) => {
+                e.preventDefault();
                 creationsSection.classList.toggle('collapsed');
             });
         }
