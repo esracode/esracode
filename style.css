@@ -330,8 +330,7 @@ body {
     }
     
     .profile-images {
-        flex-direction: column;
-        gap: 20px;
+        gap: 15px;
     }
     
     .avatar {
@@ -342,6 +341,10 @@ body {
     .qrcode-image {
         width: 100px;
         height: 100px;
+    }
+    
+    .qrcode-container {
+        padding: 10px;
     }
     
     .name {
