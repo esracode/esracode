@@ -75,9 +75,11 @@ body {
     margin-top: 25px;
     margin-bottom: 25px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: inline-block;
+    display: block;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 }
 
 .profile-images {
