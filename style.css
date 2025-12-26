@@ -65,6 +65,7 @@ body {
 
 .profile {
     margin-bottom: 40px;
+    width: 100%;
 }
 
 .profile-images-wrapper {
@@ -77,9 +78,13 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: block;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
+    overflow: visible;
+    visibility: visible;
+    opacity: 1;
 }
 
 .profile-images {
@@ -356,6 +361,9 @@ body {
     .profile-images-wrapper {
         padding: 10px;
         margin-top: 25px;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .profile-images {
