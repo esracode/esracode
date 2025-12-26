@@ -146,29 +146,40 @@
         // Generate QR code
         function generateQRCode() {
             const canvas = document.getElementById('qrcode-canvas');
-            if (canvas && typeof QRCode !== 'undefined') {
-                // Get current page URL
-                const currentUrl = window.location.href;
-                
-                QRCode.toCanvas(canvas, currentUrl, {
-                    width: 120,
-                    margin: 1,
-                    color: {
-                        dark: '#000000',
-                        light: '#FFFFFF'
-                    }
-                }, function (error) {
-                    if (error) console.error(error);
-                });
+            if (!canvas) {
+                console.error('QR code canvas not found');
+                return;
             }
+
+            // Wait for QRCode library to be available
+            function tryGenerate() {
+                if (typeof QRCode !== 'undefined') {
+                    // Get current page URL
+                    const currentUrl = window.location.href;
+                    
+                    QRCode.toCanvas(canvas, currentUrl, {
+                        width: 120,
+                        margin: 1,
+                        color: {
+                            dark: '#000000',
+                            light: '#FFFFFF'
+                        }
+                    }, function (error) {
+                        if (error) {
+                            console.error('QR Code generation error:', error);
+                        }
+                    });
+                } else {
+                    // Retry after a short delay if library not loaded yet
+                    setTimeout(tryGenerate, 100);
+                }
+            }
+
+            tryGenerate();
         }
 
         // Generate QR code when page loads
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', generateQRCode);
-        } else {
-            generateQRCode();
-        }
+        window.addEventListener('load', generateQRCode);
     </script>
 </body>
 </html>
